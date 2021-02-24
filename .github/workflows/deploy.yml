@@ -4,7 +4,7 @@ on:
 
 jobs:
   package:
-    name: Build
+    name: Package up content
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project
