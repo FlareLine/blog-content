@@ -1,0 +1,21 @@
+---
+- name: Deploy to AWS
+  hosts: localhost
+  vars:
+    content_bucket: "{{ lookup('env', 'AWS_CONTENT_BUCKET') }}"
+  tasks:
+    - name: static s3 - ensure bucket
+      s3_bucket:
+        name: "{{ content_bucket }}"
+        public_access:
+          block_public_acls: yes
+          block_public_policy: yes
+          ignore_public_acls: yes
+          restrict_public_buckets: yes
+        state: present
+      register: static_s3_bucket_result
+    - name: static s3 - sync bucket
+      s3_sync:
+        bucket: "{{ content_bucket }}"
+        file_change_strategy: checksum
+        file_root: ../content

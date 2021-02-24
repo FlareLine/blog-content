@@ -13,7 +13,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: content
-          path: 'content/*'
+          path: content/*.md
   deploy:
     name: Deploy to AWS
     runs-on: ubuntu-latest
@@ -34,4 +34,4 @@ jobs:
     - name: Run deployment playbook
       uses: ./.github/actions/ansible-playbook
       with:
-        playbook: deploy/deploy-stack.yml
+        playbook: deploy/deploy.yml
