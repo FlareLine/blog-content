@@ -9,6 +9,8 @@ By maintaining content in a separate repository to website code, blog articles c
 
 ## Specifications
 
-* Blog articles are written in [Markdown](https://en.wikipedia.org/wiki/Markdown), both for its flexibility and simplicity.
+* Blog articles are written in [Markdown](https://en.wikipedia.org/wiki/Markdown), both for its flexibility and simplicity. These are stored in the `content` directory.
 
-* Articles are deployed to an AWS S3 bucket with simple CI/CD workflow using [Github Actions](https://github.com/features/actions).
+* Articles are deployed to an AWS S3 bucket with a CI/CD workflow using [Github Actions](https://github.com/features/actions).
+
+* [Ansible](https://www.ansible.com) is used to deploy the required AWS resources, instead of an AWS CloudFormation or CDK template.
