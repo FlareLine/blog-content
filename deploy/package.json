@@ -1,0 +1,30 @@
+{
+  "name": "deploy",
+  "version": "0.1.0",
+  "description": "📃 Content repository for my blog posts.",
+  "repository": "https://github.com/FlareLine/blog-content",
+  "readme": "https://github.com/FlareLine/blog-content/blob/main/README.md",
+  "license": "https://github.com/FlareLine/blog-content/blob/main/LICENSE.md",
+  "bin": {
+    "deploy": "src/deploy.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^1.73.0",
+    "@types/node": "10.17.27",
+    "aws-cdk": "^1.73.0",
+    "ts-node": "^8.1.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-s3": "^1.73.0",
+    "@aws-cdk/aws-s3-deployment": "^1.73.0",
+    "@aws-cdk/core": "^1.73.0",
+    "dotenv": "^8.2.0",
+    "source-map-support": "^0.5.16"
+  }
+}
