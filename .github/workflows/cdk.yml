@@ -14,8 +14,11 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
-      - name: Synthesize template
-        run: cd deploy && cdk synth --path-metadata false --version-reporting false
+      - run: cd deploy
+      - name: Restore dependencies
+        run: npm install
+      - name: Synth template
+        run: cdk synth --path-metadata false --version-reporting false
   deploy:
     name: Deploy to AWS
     runs-on: ubuntu-latest
@@ -33,5 +36,6 @@ jobs:
         with:
           name: content
           path: content/*.md
+      - run: cd deploy
       - name: Run deployment
-        run: cd deploy && cdk deploy
+        run: cdk deploy
