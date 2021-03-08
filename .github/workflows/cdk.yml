@@ -18,7 +18,7 @@ jobs:
       - name: Restore dependencies
         run: npm install
       - name: Synth template
-        run: cdk synth --path-metadata false --version-reporting false
+        run: ./node_modules/aws-cdk/bin/cdk synth --path-metadata false --version-reporting false
   deploy:
     name: Deploy to AWS
     runs-on: ubuntu-latest
@@ -40,4 +40,4 @@ jobs:
       - name: Restore dependencies
         run: npm install
       - name: Run deployment
-        run: cdk deploy
+        run: ./node_modules/aws-cdk/bin/cdk deploy
