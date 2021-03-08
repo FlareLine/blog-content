@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       - run: cd deploy
       - name: Restore dependencies
-        run: npm install -g aws-cdk@latest && npm install
+        run: npm install
       - name: Synth template
         run: cdk synth --path-metadata false --version-reporting false
   deploy:
@@ -38,6 +38,6 @@ jobs:
           path: content/*.md
       - run: cd deploy
       - name: Restore dependencies
-        run: npm install -g aws-cdk@latest && npm install
+        run: npm install
       - name: Run deployment
         run: cdk deploy
