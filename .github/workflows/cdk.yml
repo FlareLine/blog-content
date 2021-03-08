@@ -14,15 +14,8 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
-      - run: cd deploy
-      - name: Restore dependencies
-        run: npm install
-      - run: ls .
-      - run: ls ./node_modules
-      - run: ls ./node_modules/aws-cdk/
-      - run: ls ./node_modules/aws-cdk/bin/
       - name: Synth template
-        run: ./node_modules/aws-cdk/bin/cdk synth --path-metadata false --version-reporting false
+        run: cd deploy && npm install && ./node_modules/aws-cdk/bin/cdk synth --path-metadata false --version-reporting false
   deploy:
     name: Deploy to AWS
     runs-on: ubuntu-latest
@@ -40,8 +33,5 @@ jobs:
         with:
           name: content
           path: content/*.md
-      - run: cd deploy
-      - name: Restore dependencies
-        run: npm install
       - name: Run deployment
-        run: ./node_modules/aws-cdk/bin/cdk deploy
+        run: cd deploy && npm install && ./node_modules/aws-cdk/bin/cdk deploy
