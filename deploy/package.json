@@ -1,6 +1,10 @@
 {
   "name": "deploy",
   "version": "0.1.0",
+  "description": "📃 Content repository for my blog posts.",
+  "repository": "https://github.com/FlareLine/blog-content",
+  "readme": "https://github.com/FlareLine/blog-content/blob/main/README.md",
+  "license": "https://github.com/FlareLine/blog-content/blob/main/LICENSE.md",
   "bin": {
     "deploy": "src/deploy.js"
   },
