@@ -7,8 +7,8 @@ jobs:
     name: Check template
     runs-on: ubuntu-20.04
     env:
-      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_CONTENT_BUCKET: ${{ secrets.AWS_CONTENT_BUCKET }}
     steps:
@@ -21,9 +21,6 @@ jobs:
     runs-on: ubuntu-20.04
     if: github.ref == 'refs/heads/main'
     env:
-      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_CONTENT_BUCKET: ${{ secrets.AWS_CONTENT_BUCKET }}
     steps:
       - name: Checkout project
@@ -33,5 +30,11 @@ jobs:
         with:
           name: content
           path: content/*.md
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}us-east-2
       - name: Run deployment
         run: cd deploy && npm install && ./node_modules/aws-cdk/bin/cdk deploy
