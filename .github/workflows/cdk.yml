@@ -37,4 +37,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Run deployment
-        run: cd deploy && npm install && ./node_modules/aws-cdk/bin/cdk deploy
+        run: cd deploy && npm install && ./node_modules/aws-cdk/bin/cdk deploy --require-approval never
