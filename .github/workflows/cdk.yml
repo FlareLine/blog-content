@@ -6,23 +6,18 @@ jobs:
   synth:
     name: Check template
     runs-on: ubuntu-20.04
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      AWS_CONTENT_BUCKET: ${{ secrets.AWS_CONTENT_BUCKET }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
       - name: Synth template
         run: cd deploy && npm install && ./node_modules/aws-cdk/bin/cdk synth --path-metadata false --version-reporting false
+        env:
+          AWS_CONTENT_BUCKET: ${{ secrets.AWS_CONTENT_BUCKET }}
   deploy:
     name: Deploy to AWS
     runs-on: ubuntu-20.04
     needs: synth
     if: github.ref == 'refs/heads/main'
-    env:
-      AWS_CONTENT_BUCKET: ${{ secrets.AWS_CONTENT_BUCKET }}
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
@@ -39,3 +34,5 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Run deployment
         run: cd deploy && npm install && ./node_modules/aws-cdk/bin/cdk deploy --require-approval never
+        env:
+          AWS_CONTENT_BUCKET: ${{ secrets.AWS_CONTENT_BUCKET }}
