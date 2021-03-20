@@ -3,7 +3,7 @@ on:
   push:
 
 jobs:
-  cdk:
+  synth:
     name: Check template
     runs-on: ubuntu-20.04
     env:
@@ -19,6 +19,7 @@ jobs:
   deploy:
     name: Deploy to AWS
     runs-on: ubuntu-20.04
+    needs: synth
     if: github.ref == 'refs/heads/main'
     env:
       AWS_CONTENT_BUCKET: ${{ secrets.AWS_CONTENT_BUCKET }}
